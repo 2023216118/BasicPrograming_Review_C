@@ -1,0 +1,126 @@
+#define  _CRT_SECURE_NO_WARNINGS //scanf 함수를 쓰기 위한 밑에서 가져온경고코드에서
+
+
+#include <stdio.h>  //include 는 붙여넣기! stdio.h라는 컴터 있는 파일 가져와 붙여! 여기에는 프린트에프처럼 라이브러리 있다
+//전처리(preprocessor) 는 샾 있는거 / 여기다가 이 파일을 포함해주세요!
+//프로그램을 실행하면 int main()함수가 호출됨(아래 exe파일을 실행하면 이것부터 무조건 실행)
+//
+//
+//
+int main(void) { //대소문자 구분 주의) 안쪽에 void는 안써도 무관
+	printf("Hello,World!"); //라이브러리 함수 PrintFunction은 화면출력 라이브러리 함수 (원래 겁나 복잠한 것을 라이브러리로)
+	return 0;//세미콜론 필수 /메인 함수 종료 사인/생략해도 무관/종료하면서 운영체제에 돌려주는 값
+}
+
+
+//
+////두 줄을 출력하는 프로그램 작성
+int main() {
+	printf("오늘 날씨가 어때요?\n"); //특수문자 "여기서 줄 바꿔주세요"역슬레쉬(엔터 위에)n 은 줄바꿈 혹은 \으로도 상관 없다 (new line의 N)
+	printf("좀 흐리네요.");
+//
+	}
+
+//같은 기능의 프로그램을 printf 한번으로
+int main() {
+	printf("오늘 날씨가 어때요? \n좀 흐리네요.");
+//
+	return 0; //리턴 다음에는 실행이 되지 않는다!
+//
+	printf("여기도 실행이 될까요?");
+	}
+//
+
+//
+////구구단 출력하기
+int main() {
+	printf("2 x %d = %d\n",1,2*1); //특수문자 %d는 콤마 뒤에 있는 것을 계산해서 넣어주세요
+	printf("2 x %d = %d\n",9,2*9);
+}
+//
+
+/*이것도 주석은 가능하지만 귀찮으니 하지 않는다*/
+
+int main() {
+	int x, y, sum; //정수형 변수 int(정수 담는 그릇) intteger의 준말
+	x = 100; // 대입문(assignment) 오른쪽 값을계산하여 왼쪽 변수에 넣음
+	y = 200;
+	sum = x + y;
+	printf("합 = %d \n", sum);
+	}
+
+int main() {
+	int x, y, sum, diff, mul, div; //그릇 안쓰면 회색 줄로 알려줌
+	x = 20;
+	y = 10;
+	sum = x + y;
+	diff = x - y;
+	mul = x * y;
+	div = x / y;
+	printf("합 =%d\n", sum);
+	printf("차 =%d\n", diff);
+	printf("곱 =%d\n", mul);
+	printf("몫 =%d\n", div); //왜 10/20은 0인가? 정수/정수=정수값이기에 0.5리고 하면 버리고 0을 출력한다.
+	}
+
+int main() {
+	int x, y, sum;
+//
+	printf("첫번째 수 입력 : ");
+	scanf("%d", &x); //초록색은 경고 빨간색이 오류
+//
+	printf("두번째수 입력 : ");
+	scanf("%d", &y);//스캔함수는 위험한 함수 단내 프레임이 막는다. / 스캔에프는 사용자에게 입력을 받는 함수/ 그릇을 열 수 있게 하는 것이 & 왜냐면 이건 내 그릇인데 엠퍼센트를 줘서 남에게 넣어줄 수 있도록 하는 것이다
+// //&x는 변수 x의 주소(address) / 스캔 에프는 입력만 받는다. 따라서 출력을 안하니가 "두번째 수 입력" 같은 거 넣으면 안된다.
+// //digit 10진수라는 뜻이다(%d) 10진 정수를 &그릇에 입력받는다.
+//
+// //10진 정수로 입력받겠다. 그리고 되도록"%d"만 써라 공백도 노노
+//
+	sum = x + y;
+	printf("합 = %d",sum); //10진 정수로 출력하겠다.
+	}
+
+int main() {
+	float radius, area; //float는 실수형 변수 / floating piont real number... 부동소수점 형식
+//
+	printf("반지름 : ");
+	scanf("%f", &radius);// %f는 실수형식
+//
+	area = 3.14 * radius * radius;
+//
+	printf("면적 = %f\n", area);
+//
+	}
+
+
+// 위 식을 수정해서 반지름 ???인 원의 면적 =??? 출력하기
+
+int main() {
+	float radius, area; //float는 실수형 변수 / floating piont real number... 부동소수점 형식
+
+	printf("반지름 : ");
+	scanf("%f", &radius);// %f는 실수형식
+
+	area = 3.14 * radius * radius;
+
+	printf("면적 = %f\n", area);
+	printf("반지름이 %f인 원의 면적 = %f", radius, area);
+	}
+
+#define PI //전처리기가 파이를 모두 바꾸기
+
+int main() {
+	float radius, area; //float는 실수형 변수 / floating piont real number... 부동소수점 형식
+	float round;
+
+	printf("반지름 : ");
+	scanf("%f", &radius);// %f는 실수형식
+
+	area = 3.14 * radius * radius;
+	round = radius * 2 * 3.14;
+
+	//printf("면적 = %f\n", area);
+	printf("반지름이 %f인 원의 면적 = %f,둘레=%f", radius, area, round);
+
+	//위에 가로에 라운드 대신에 식으로 써놓아도 괜춘 파이 곱하기 라디어스 곱하기 2로
+}
