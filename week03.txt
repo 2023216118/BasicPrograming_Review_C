@@ -1,0 +1,134 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include stdio.h
+
+int main() {
+	double rate, usd; double은 (2배 정밀) 실수형 변수
+	int krw; int는 정수형 변수
+
+	printf(환율입력  );
+	scanf(%lf, &rate); %lf는 double형식
+
+	printf(원화금액  );
+	scanf(%d, &krw); %lf는 double형식
+
+	usd = krw  rate;  오른쪽 값을 왼쪽 그릇에 , =는 대입연산
+
+	문제활율 0000일 때 0000원은 0000달러
+
+	printf(환율 %lf일 때 %d원은 %lf달러n, rate, krw, usd);
+}
+
+int main() {
+	double num1, num2, num3, sum, avg;
+
+	printf(3개의 실수 );
+	scanf(%lf %lf %lf, &num1, &num2, &num3);뛰어쓰기로 사이를 해야한다(만약 콤마를 쓰면 이따가도 콤마를 해야 한다)
+
+	sum = num1 + num2 + num3;
+	avg = sum  3;
+
+	printf(합 = %.2lfn, sum);  .2는 뒤에 소수점 자리 아래 두자리 출력(출력 형식까지는 시험 문제로 안낸다)
+	printf(평균 = %.2lfn, avg);
+
+	return 0;
+}
+
+
+ p224-228 if(조건문)
+if(조건)에 ;를 찍지 마세요 if (조건);은 틀린 표현
+int main() {
+	int number;
+	printf(정수입력  );
+	scanf(%d, &number);
+
+	if (number  0) ()안 조건이 True이면 if아래 문장 실행(맨 앞에 해야 함)이게 트루이라면 뒤에있는 조건이 트루이더라도 그건 샐행 안하고 종료해버림
+		printf(양수입니다n);
+	else if (number == 0)    ()안 조건이 True이면 else if아래 문장 실행(여러개 가능)
+		printf(0입니다.n);
+	else ()안 조건이 False이면 else 아래 문장 실행(맨 뒤에)
+		printf(음수입니다.);
+
+	printf(입력한 값 = %dn, number);
+
+	return 0;
+
+}
+
+p225,229
+대입연산  변수 = 값
+산술연산자 + -   % 비교연산자   == = =(말하는 순서 대로)
+
+ int main() {
+	 int number;
+	 printf(정수입력  );
+	 scanf(%d, &number);
+
+	 if (number % 2 == 0) %는 나머지 연산
+		 printf(짝수입니다n);
+	 else
+		 printf(홀수입니다.);
+ }
+
+p232,236
+int main() {
+	int year;
+
+	printf(연도 입력  );
+	scanf(%d, &year);
+
+	&& AND연산자,  OR 연산자, != 같지않다
+	if ((year % 4 == 0 && year % 100 != 0)
+		 year % 400 == 0)(줄바꿈 없어도 괜춘)
+		printf(%d년은 윤년입니다.n, year);
+	else
+		printf(%d년은 윤년이 아닙니다.n, year);
+}
+
+253(1)
+문제 2개의 정수를 입력받아 첫번째 정수가 두번째 정수로 나누어 떨어지계
+int main() {
+
+	int num1, num2;
+
+	scanf(%d %d, &num1, &num2);
+
+	if (num1 % num2 == 0)
+		printf(%d는 %d의 약수입니다.,num2, num1);
+
+	else
+		printf(%d는 %d의 약수가 아닙니다., num2, num1);
+
+}
+
+문제2 ) 3개의 정수 입력받은 후, 가장 작은 값 결정하는 프로그램 작성(253(2))
+int main() {
+	int num1, num2, num3;
+
+	scanf(%d %d %d, &num1, &num2, &num3);
+
+	if (num1  num2 && num1  num3)
+		printf(가장 작은 수는 %d, num1);
+	else if (num2  num1 && num2  num3)
+		printf(가장 작은 수는 %d, num2);
+	else
+		printf(가장 작은 수는 %d, num3);
+}
+
+235,239
+int main() {
+	int score;
+	printf(성적입력  );
+	scanf(%d, &score);
+
+	if (score = 90)
+		printf(학점A);
+	if (score = 80)
+		printf(학점B);
+	if (score = 70)
+		printf(학점C);
+	if (score = 60)
+		printf(학점D);
+	else
+		printf(학점F);
+}
+
