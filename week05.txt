@@ -1,0 +1,219 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h> //printf 함수 , scanf 함수 이용
+
+
+//
+//복습하기
+int main() { //main 함수는 정수 값을 반환한다.(가진다)
+
+	char c; //ASCII 코드값(0~127 정수)을 저장
+	int i;
+	float f;
+	double d;
+
+// 대입 연산 : 변수 = 값;
+ //c = 'a'; // c = 97; 과 동일
+
+ //출력, 입력 함수
+ printf(".....");
+ printf("...%c %d %d %lf...",c,i,f,d);
+ scanf("%c %d %d %lf", &c, &i, &f, &d);
+
+// 산술연산 : + - * / %(정수/정수=정수/실수가 하나라도 있으면 실수로/%는 정수만)
+//비교연산 : < > <= >= == !=
+//논리연산 : &&(and), ||(or), !(not)
+ 3 / 2 = 1
+ 3.0/2 = 1.5
+
+ if (cond1) {
+ ...
+ }
+
+ else if (cond2) {
+	 ...
+ }
+
+ else {
+
+ if(...)
+	 ...
+ else(...)
+	...
+ }
+
+ return 0;
+
+}
+
+
+//본 수업 내용 p.239
+
+int main() {
+	char op;
+	int x, y, result=0; //result=0으로 수정(초기화),x랑 y는 scanf로 지정하기에 병 안에 쓰레기가 있어도 괜춘
+
+	printf("수식입력 >> ");
+	scanf("%d %c %d", &x, &op, &y);
+
+	 if (op == '+')
+		result = x + y;
+	else if (op == '-')
+		result = x - y;
+	else if (op == '*')
+		result = x * y;
+	else if (op == '/')
+		result = x / y;
+	else if (op == '%')
+		result = x % y;
+	else
+		printf("지원되지 않는 연산자%c\n", op);
+
+	printf("%d %c %d = %d\n", x, op, y, result);
+
+	return 0;
+}
+
+ /*문제 p.254
+ 시간 나이를 입력받음
+17시 미만 12세 이하,65세 이상 25000원, 그외 34000원
+17시 이후 나이에 관계없이 10000원*/
+
+int main() {
+
+//틀린 문장if (time < 17 age <= 12 || age >= 63)하면 노노/if안에 조건논연산하나만
+
+	int age, time;
+	printf("현재 시간과 나이를 입력하시오(시간 나이)");
+	scanf("%d %d", &time, &age);
+
+	 if (age < 3)
+		printf("0원입니다.");
+	else if (time < 17)
+	if (age <= 12 || age >= 63)
+		printf("요금은 25000원 입니다.");
+	else
+		printf("요금은 34000원 입니다.");
+	else if (time >= 17)
+		printf("요금은 10000원 입니다.");
+
+	return 0;
+}
+
+//p.241
+int main() {
+	int number;
+	printf("정수 입력 : ");
+	scanf("%d", &number);
+
+	switch (number) {
+	case 0:
+		printf("없음\n");
+ //break;
+	case 1:
+		printf("하나\n");
+		break;
+	case 2:
+	case 3:
+		printf("두서너개\n");
+		break;
+	default:
+		printf("많음\n");
+ }
+}
+
+//문제 p.245
+int main() {
+	int month, days;
+	printf("월 달 입력 : ");
+	scanf("%d", &month);
+
+	switch (month) { //()안의 값은 정수가 되어야 함,case 뒤에는 정수값 상수만 가능, 1, 'a', -1
+	case 2:
+		days = 28;
+		break;
+	case 4:
+	case 6:
+	case 9:
+	case 11:
+		days = 30;
+		break;
+	default :
+		days = 31;
+ //마지막 break는 없어도 동일(else 없는 if문처럼 default없어도 됨)
+ }
+
+	printf("%d월의 일수 = %d\n", month, days);
+
+	return 0;
+}
+
+//플러스문제 위 식에서 연도를 입력받아 윤년일때 2월의 일수 =29
+int main() {
+	int year, month, days;
+	printf("연 월 입력 : ");
+	scanf("%d %d", &year, &month);
+
+	if((year%4==0&&year%100!=0)||year%400==0) //윤년 p.232
+		switch (month) {
+		case 2:
+			days = 29;
+ }
+	else
+		switch (month) {
+		case 2:
+			days = 28;
+			break;
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			days = 30;
+			break;
+		default:
+			days = 31;
+
+ }
+ //case안에 if문 쓰기(교수님버전)
+ //if문으로 할 때 if2월일때/ifelse46911/else나머지
+
+	printf("%d월의 일수 = %d\n", month, days);
+
+	return 0;
+}
+
+//p.246
+int main() {
+
+	char op;
+	int x, y, result = 0; //result=0으로 수정(초기화),x랑 y는 scanf로 지정하기에 병 안에 쓰레기가 있어도 괜춘
+
+	printf("수식입력 >> ");
+	scanf("%d %c %d", &x, &op, &y);
+
+	switch (op) {
+	case'+':
+		result = x + y;
+		break;
+	case'-':
+		result = x - y;
+		break;
+	case'*':
+		result = x * y;
+		break;
+	case'/':
+		result = x / y;
+		break;
+	case'%':
+		result = x % y;
+		break;
+	default:
+		printf("지원되지 않는 연산자%c\n", op);
+	}
+	printf("%d %c %d = %d\n", x, op, y, result);
+	return 0;
+
+}
+
+op = ' ';//스페이스도 가능함 아스키코드로, 역슬레쉬/%를 나타내고자 할 때 2개 쓴다
+op = '';//nono 하나라도 있어야 함
+printf("");//가능함
