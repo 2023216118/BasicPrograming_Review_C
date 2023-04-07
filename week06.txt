@@ -1,0 +1,189 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+// 문제) 문자를 하나 입력받아
+//알파벳 대문자, 소문자, 기타문자 여부를 출력하는 프로그램
+//문제2) 대문자이면 해당 소문자, 소문자이면 해당 대문자 출력
+int main() {
+
+ char ch;
+
+ printf("문자를 입력하세요 : ");
+ scanf("%c", &ch);
+
+ if ('A' <= ch && ch<='Z')
+ printf("%c는 대문자이고 소문자는 %c",ch,ch-'A'+'a'); //ch가 'A'라면()'혹은 그냥 32를 더하거나 뺀다
+ else if ('a' <= ch && ch <= 'z')
+ printf("%c는 소문자이고 대문자는 %c", ch,ch - 'a' + 'A');
+ else
+ printf("기타문자입니다.");
+
+ return 0;
+}
+
+//4장(비주얼스튜디오 바이트 버전으로 볼 때)
+//정수형 short(2바이트), int(4), long(4), long long(8)
+//부동소수점형(실수) float(4),double(8), long double
+//문자형 char(1)
+//129
+int main() {
+ int x; //sizeof는 변수 또는 자료형이 차지하는 바이트수를 알려줌(중간시험가능성_정의)
+ //변수 또는 자료형 둘 다 써야 한다!!!(문제5)
+ //예를 들어 줘야 한다!! 이걸하면 몇으로 나오고 쇼트는 2바이트 차지한다!!
+ //서술형에는 전부 다 아는것 다 써야 한다 친절하게!!!! 빼먹지 말고!!!
+
+ printf("변수 x의 크기 : %d\n", sizeof(x)); //변수
+
+ printf("char x의 크기 : %d\n", sizeof(char)); //자료형
+ printf("short x의 크기 : %d\n", sizeof(short));
+ printf("int x의 크기 : %d\n", sizeof(int));
+ printf("long x의 크기 : %d\n", sizeof(long));
+ printf("long long x의 크기 : %d\n", sizeof(long long));
+ printf("float x의 크기 : %d\n", sizeof(float));
+ printf("double x의 크기 : %d\n", sizeof(double));
+
+
+ return 0;
+}
+
+//p.131
+// 언사인드 수식자 : 0부터만 된다(음수 노노)
+//오버플로우 : like카운터
+
+#include <limits.h>
+//끝에서 한번 딸깍 눌렀을 때 몇이 나올까에 대한 코드
+int main() {
+ short s_money = SHRT_MAX;
+ unsigned short u_money = USHRT_MAX;
+
+ s_money = s_money + 1;
+ printf("s_money=%d\n", s_money);
+
+ u_money = u_money + 1;
+ printf("u_money=%u\n", u_money);
+
+ return 0;
+}
+
+//p.137
+#define TAX_RATE 0.2
+// 상수를 선언하는 2가지 방법
+// 1. #define(샾은 전처리기가 처리)
+// 2. const 변수형 변수 = 초기값
+//137쪽 define과 const의 차이 뭐가 좋을까?(중요 시험 가능성)
+int main() {
+ //const로 선언한 변수는 값 변경X(무조건 변수 값이 필요하다)
+ const int MONTHS = 12; //변수에 12를 항상 고정한다(상수:constant)
+ int m_salary, y_salary;
+
+ //MONTHS=11 변경 불가
+
+ printf("월급 입력 : ");
+ scanf("%d", &m_salary);
+
+ y_salary = m_salary * MONTHS;
+ printf("연봉 =%d\n", y_salary);
+ printf("세금 =%f\n", y_salary * TAX_RATE);
+
+ return 0;
+}
+
+
+//145
+int main() {//정밀도에서 차이난다
+ float x = 1.2345678901234567890;//메모리를 덜 쓴다
+ double y = 1.2345678901234567890;//더 정밀하다
+
+ printf("float크기=%d\n", sizeof(float));
+ printf("double크기=%d\n", sizeof(double));
+
+ printf("x=%30.25f\n", x); //30자리, 소수점 이하25자리 출력
+ printf("Y=%30.25lf\n", y);
+
+
+ return 0;  
+}
+
+//150 아스키코드표
+
+int main() {
+
+ char code1 = 'A';//아래 문장과 동일
+ char code2 = 65;
+
+ printf("code1=%c\n", code1);
+ printf("code2=%c\n", code2);
+
+ return 0;
+
+}
+
+
+int main() {
+
+ char ch = 'A';//아래 문장과 동일
+
+ printf("%c %d\n", ch, ch);//%c:문자로도,  %d:숫자로도 출력
+
+ return 0;
+
+}
+
+//문제)163에 8번 정수 변수에 %d 입력받아 %c로 출력
+
+int main() {
+
+ int x;
+ printf("ASCII코드 값을 입력하시오 : ");
+ scanf("%d", &x);
+ printf("문자 : %c입니다.", x);
+
+ return 0;
+
+}
+
+//추가문제) 위와 반대로 출력
+
+int main() {
+
+ char x;
+ printf("ASCII코드 문자값을 입력하시오 : ");
+ scanf("%c", &x);
+ printf("숫자 : %d입니다.", x);
+
+ return 0;
+
+}
+
+
+
+//문제 162쪽 3번 변형
+//정수 x,y 입력 : 10 20
+//x = 10 , y = 20  출력후 x,y 변수의 값을 서로 교환
+//x = 20 , y = 10
+
+int main() {
+
+	//tmt변수 필요(마치 콜라 사이다 담긴 병 옮기기)
+	int x, y, z;
+
+	printf("정수 x,y 입력 : ");
+	scanf("%d %d", &x, &y);
+	printf("x=%d,y=%d\n", x, y);
+
+	z = x;
+	x = y;
+	y = z;
+
+	printf("x=%d,y=%d\n", x, y);
+
+	return 0;
+
+}
+
+
+
+
+
+
+
