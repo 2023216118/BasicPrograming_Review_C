@@ -1,0 +1,210 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+일 수 입력 : 400 일 수 입력 : 3  일 수 입력 :90
+1년 1개월 10일 0년 0개월 3일 0년 3개월 0일
+
+int main() {
+
+ int input, years, months, days;
+
+ printf("일 수 입력 : ");
+ scanf("%d", &input);
+
+ years = input/360;
+ months = input % 360/30;
+ days = input % 360 % 30; //혹은 input % 30 , 30의 배수이니까
+
+ printf("%d년 %d개월 %d일", years, months, days);
+}
+
+#ifdef _DEBUG 시험에는 안나옴
+#endif 디버그하는 방법_각 줄의 변수들이 가지는 값을 출력해서 보여준다
+안에 있는 것은 디버그를 안하면(relesase이면) 싹 없어진다
+빌드>구성관리자>활성솔류션>release/debug
+
+int main() {
+
+ char ch;
+ printf("문자입력 : ");
+ scanf("%c", &ch);
+
+#ifdef _DEBUG
+ printf("%c\n", ch);
+#endif
+
+ //바운더리(끝에서) 경계선에 있는것을 테스트해봐야함
+ if ('a' <= ch && ch <= 'z') {
+ printf("%c 소문자 %d번째\n", ch,ch-'a'+1);
+ }
+ else if ('A' <= ch && ch <= 'Z') {
+ printf("%c 대문자 %d번째\n", ch,ch-'A'+1);
+ }
+ else
+ printf("%c 영문자 아님\n", ch);
+
+}
+
+
+SI 회사는 남의 회사의 소프트웨어를 개발해주는 회사
+int main() {
+ int n, i, count=0;
+ printf("자연수 : ");
+ scanf("%d", &n);
+ i = 1;
+ printf("약수 = ");
+ while (i<=n) { //while은 한번하고 또 한번 확인 if문과 차이
+ if (n%i==0) {
+ printf("%d\n", i);
+ count++;
+ }
+ i++;
+ }
+ printf("\n%d의 약수 개수 = %d, ", n, count);
+
+ if (count == 2)
+ printf("소수\n");
+ else
+ printf("소수아님\n");
+
+ i = 1;
+
+ printf("약수 아닌 수 = ");
+ while (i <= n) { //while은 한번하고 또 한번 확인 if문과 차이
+ if (n%i != 0) {
+ printf("%d", i);
+ i++;
+ }
+ }
+
+}
+
+do while문 p275
+예제1
+int main() {
+
+ int number, sum = 0;
+
+ do {
+ printf("정수 : ");
+ scanf("%d", &number);
+ sum += number;
+ } while (number != 0);
+
+ printf("합 = %d", sum);
+
+ return 0;
+
+}
+
+p277
+int main() {
+
+ int i = 0;
+
+ do {
+ printf("1. 새로만들기\n");
+ printf("2. 새로만들기\n");
+ printf("3. 새로만들기\n");
+ printf("선택 : ");
+ scanf("%d", &i);
+ } while (i<1||i>3);
+
+ printf("선택 = %d", i);
+
+ return 0;
+
+}
+
+
+#include <stdlib.h>
+#include <stdio.h>.입출력 함수의 원형(prototype)이 선언
+#include <stdlib.h> 난수 값 반환 rand, 난수 seed 지정 srand 함수
+유사 랜덤 함수 rand 랜덤 순서가 계속 똑같이 실행되어 나옴
+따라서 scrand가 있음 seed값이 똑같으면 계속 scrand도 그럼
+따라서 시간에 따라 seed값을 설정
+#include <time.h>//time함수
+
+//279 난수발생
+int main() {
+
+ srand(time(0)); //rand 함수 최초 호출 전 한번만 호출/ 여기서는 time(0)이 seed
+
+ //seed를 여러번 뿌리면 안된다. 랜덤할 때마다 seed는 노노
+ //랜드 부르기 전에 에스랜드는 한번만 불러야 한다.
+ int answer = rand() % 100 + 1;
+ //d어떤 자연수 n%10은 0~9까지이다
+ //1부터 10까지로 하려면 +1을 해주어야 한다
+ int guess, tries = 0;
+
+ do {
+ printf("정답 추측 : ");
+ scanf("%d", &guess);
+ tries++;
+ if (guess > answer)
+ printf("HIGH");
+ else if (guess < answer)
+ printf("LOW");
+ } while (guess != answer);
+ printf("시도횟수 = %d\n", tries);
+
+ return 0;
+}
+
+309(10)
+2와 100사이 모든 소수를 출력
+2 3 5 7 ...  83 89 97
+
+int main() {
+ int n=2,count,i;
+
+ //n은 기준값
+ //count는 기준값 n의 소수개수
+
+ while (n <= 100) {
+ count = 0;
+ //반복문으로 n의 약수의 개수를 셈
+ i = 1;
+ while (i<=n) {
+ if (n % i == 0) count++;
+ i++;
+ }
+ if (count==2) //n가 소수이면
+ printf("%d ", n);
+ n++;
+ }
+}
+
+카운트대신에 플래그 변수
+나누어 떨어지는게 있으면 내리고
+
+버블 샐랙션 인/...뭐? O(n제곱)과 O(n곱하기 로그n)
+nomad coding sorting노마드 코ㄷ인 정렬알고리즘 한방에 이해하기
+
+
+int main() {
+	int n = 2, is_prime, i;
+
+
+	n은 기준값
+	count는 기준값 n의 소수개수
+
+	while (n <= 100) {
+
+		is_prime = 1;
+		반복문으로 n의 약수의 개수를 셈
+		i = 2;
+		while (i < n) {
+			if (n % i == 0) is_prime = 0;
+			break;
+		}
+		i++;
+	}
+	if (is_prime) //n가 소수이면
+		printf("%d ", n);
+	n++;
+}
+return 0;
+}
+
+사진 찍어놓음 위에 오류인거 2갬
