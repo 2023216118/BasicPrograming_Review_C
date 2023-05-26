@@ -1,0 +1,178 @@
+#define _CRT_NO_SECURE_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+나누를 이용 주사위 6만번 빈도 내림차순으로 정렬 정렬된 결과 출력(과제 도움)
+
+#define SIZE 6;
+
+int main() {
+ int freq[SIZE];
+ int i, j, k, temp, most;
+
+ srand(time(0));
+ for (i = 0; i < 60000; i++)
+ freq[rand() % 10]++;
+
+ for (i = 0; i < SIZE - 1; i++) {
+
+ most = i;
+
+ for (j = i + 1; j < SIZE; j++)
+ if (freq[j] > freq[most])
+ most = j;
+
+ if (i != most) {
+ temp = freq[i];
+ freq[i] = freq[most];
+ freq[most] = temp;
+ }
+
+ printf("%d", freq[i]);
+ }
+}
+
+p430,432
+
+
+#define ROWS 3
+#define COLS 5
+
+int main() {
+
+ int s[ROWS][COLS], r, c;
+
+ for (r = 0; r < ROWS; r++)
+ for (c = 0; c < COLS; c++)
+ s[r][c] = rand() % 100;
+
+ for (r = 0; r < ROWS; r++) {
+ for (c = 0; c < COLS; c++)
+ printf("%02d ", s[r][c]);
+ putchar('\n');
+ }
+
+}
+
+위에 예제 스캔에프로 입력받도록 수정
+
+#define ROWS 2
+#define COLS 3
+
+int main() {
+
+ int s[ROWS][COLS], r, c;
+
+ for (r = 0; r < ROWS; r++)
+ for (c = 0; c < COLS; c++)
+ scanf("%d",&s[r][c]); //위에 예제 스캔에프로 입력받도록 수정
+
+ for (r = 0; r < ROWS; r++) {
+ for (c = 0; c < COLS; c++)
+ printf("%02d ", s[r][c]);
+ putchar('\n');
+ }
+
+}
+
+434
+#define ROWS 3
+#define COLS 5
+
+int main() {
+ int a[ROWS][COLS] = { 87, 98, 80, 76, 3,
+ 99, 89, 90, 90, 0,
+ 65, 68, 50, 49, 0}; // 중괄호 중간에 있든 없든 상관 없다
+
+ int i;
+ for (i = 0; i < ROWS; i++) {
+ double final_score = a[i][0] * 0.3 + a[i][1] * 0.4
+ + a[i][2] * 0.2 + a[i][3] * 0.1 - a[i][4];
+ printf("학생 %i의 최종 성적 = %5.2lf\n", i + 1, final_score);
+ }
+
+}
+
+434
+
+#define ROWS 3
+#define COLS 3
+
+int main() {
+
+ int A[ROWS][COLS] = { 2,3,0,8,9,1,7,0,5 };
+ int B[ROWS][COLS] = { 1,0,0,1,0,0,1,0,0 };
+ int C[ROWS][COLS];
+ int r, c;
+
+ for (r = 0; r < ROWS; r++)
+ for (c = 0; c < COLS; c++)
+ C[r][c] = A[r][c] + B[r][c];
+
+ for (r = 0; r < ROWS; r++) {
+ for (c = 0; c < COLS; c++)
+ printf("%d ", C[r][c]);
+ putchar('\n');
+ }
+
+}
+
+//445(7)
+#define ROWS 3
+#define COLS 5
+
+int main() {
+ int A[ROWS][COLS] = { 12,56,32,16,98,99,56,34,41,3,65,3,87,78,21 };
+ int r, c, sum;
+
+ for (r = 0; r < ROWS; r++) {
+ sum = 0;
+ for (c = 0; c < COLS; c++)
+ sum = sum + A[r][c];
+ printf("%d행의 합계 : %d", r, sum);
+ putchar('\n');
+ }
+
+ for (c = 0; c < COLS; c++) {
+ sum = 0;
+ for (r = 0; r < ROWS; r++)
+ sum = sum + A[r][c];
+ printf("%d행의 합계 : %d", c, sum);
+ putchar('\n');
+ }
+}
+
+447(10)
+
+0-100까지 점수 난수 채우기
+학생 5명, 과목3개,2차원 배열 선언
+각 배열 요소를 난수를 발생시켜서 0-100 점수 채워 넣음
+점수를 출력(432 예제 참고)
+
++ 각 학생의 평균 점수(소수점 이하 값 유지)를 출력
+출력 예 (난수이므로 다른 값이 나오는 것이 정상)
+
++각 시험별 평균 점수
+
+#define STUDENTS 5
+#define SUBFECTS 3
+
+int main() {
+
+	int s[STUDENTS][SUBFECTS], stu, sub, sum;
+
+	for (stu = 0; stu < STUDENTS; stu++)
+		for (sub = 0; sub < SUBFECTS; sub++)
+			s[stu][sub] = rand() % 101;
+
+	for (stu = 0; stu < STUDENTS; stu++) {
+		printf("학생%d ", stu + 1);
+		sum = 0;
+		for (sub = 0; sub < SUBFECTS; sub++) {
+			printf("%02d ", s[stu][sub]);
+			sum += s[stu][sub];
+		}
+		printf("%5.1lf\n", (double)sum / SUBFECTS);
+	}
+}
