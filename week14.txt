@@ -1,0 +1,84 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+//이전시간 복습 및 추가사항
+
+//447(10)
+//
+//0 - 100까지 점수 난수 채우기
+//학생 5명, 과목3개, 2차원 배열 선언
+//각 배열 요소를 난수를 발생시켜서 0 - 100 점수 채워 넣음
+//점수를 출력(432 예제 참고)
+//
+//+ 각 학생의 평균 점수(소수점 이하 값 유지)를 출력
+//출력 예(난수이므로 다른 값이 나오는 것이 정상)
+//
+//+ 각 시험별 평균 점수
+
+#define STUDENTS 10 //전처리기가 처리
+#define SUBFECTS 3
+
+int main() {
+
+	int s[STUDENTS][SUBFECTS], sum;
+	double avg[STUDENTS];
+	int stu, sub, indexOfMAx, indexOfMin;
+
+	for (stu = 0; stu < STUDENTS; stu++)
+		for (sub = 0; sub < SUBFECTS; sub++)
+			s[stu][sub] = rand() % 101;
+
+	printf("          ");
+	for (sub = 0; sub < SUBFECTS; sub++)
+		printf("과목%d ", sub + 1);
+	printf("  평균\n");
+
+
+	//학생 평균 출력
+	for (stu = 0; stu < STUDENTS; stu++) {
+		printf("학생%2d ", stu + 1);
+		sum = 0;
+		for (sub = 0; sub < SUBFECTS; sub++) {
+			printf("%6d ", s[stu][sub]);
+			sum += s[stu][sub];
+		}
+		avg[stu] = (double)sum / SUBFECTS;
+		printf("%6.1lf\n", (double)sum / SUBFECTS); 
+		//정수 나누기 정수 하면 소수가 나올 때 올림?내림?하니까 아무곳이나 더블 붙이기
+	}
+
+	//과목 평균 출력
+	printf("   평균 ");
+	for (sub = 0; sub < SUBFECTS; sub++) {
+		sum = 0;
+		for (stu = 0; stu < STUDENTS; stu++) {
+			sum += s[stu][sub];
+		}
+		printf("%6.1lf ", (double)sum/STUDENTS);
+	}
+	putchar('\n');
+
+
+
+	indexOfMAx = 0;
+	for (stu = 0; stu < STUDENTS; stu++) {
+
+		if (avg[stu] > avg[indexOfMAx])
+			indexOfMAx = stu;
+	}
+	printf("최고평균점수 = %.1lf, 학생번호 = %2d\n", avg[indexOfMAx], indexOfMAx + 1);
+
+	for (sub = 0; sub < SUBFECTS; sub++) {
+		indexOfMAx = indexOfMin = 0;
+		for (stu = 1; stu < STUDENTS; stu++) {
+			if (s[indexOfMAx][sub] < s[stu][sub])
+				indexOfMAx = stu;
+			else if (s[indexOfMAx][sub] > s[stu][sub])
+				indexOfMin = stu;
+		}
+		printf("과목%2d 최고점수 = %2d, 학생번호 = %2d\n", sub+1, s[indexOfMAx][sub],indexOfMAx+1);
+		printf("과목%2d 최저점수 = %2d, 학생번호 = %2d\n", sub + 1, s[indexOfMin][sub], indexOfMin + 1);
+	}
+}
